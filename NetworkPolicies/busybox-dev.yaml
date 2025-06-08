@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox-dev
+  labels:
+    app: busybox-dev
+spec:
+  containers:
+  - name: busybox
+    image: busybox
+    command: ["sleep", "3600"] #pour laisser le pod actif pendant une heure

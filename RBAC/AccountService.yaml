@@ -1,0 +1,13 @@
+# Description: Defines a ServiceAccount in the 'test' namespace for use with RBAC permissions.
+apiVersion: v1
+# apiVersion: Specifies the Kubernetes core API version, used for ServiceAccount resources.
+# Unlike RBAC resources(rbac.authorization.k8s.io/v1), ServiceAccounts are part of the core 'v1' API.
+
+kind: ServiceAccount
+# kind: Indicates the resource type. A ServiceAccount provides an identity for processes or users in a namespace.
+
+metadata:
+  name: service-account
+  # name: The ServiceAccount’s name, unique within the namespace. Here, 'service-account' is used
+  namespace: test
+  # namespace: Places the ServiceAccount in the 'test' namespace

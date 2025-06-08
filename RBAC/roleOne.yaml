@@ -1,0 +1,30 @@
+# Description: Defines an RBAC Role in Kubernetes to control access to resources in the 'test' namespace.
+apiVersion: rbac.authorization.k8s.io/v1
+# apiVersion: Specifies the Kubernetes API version used.
+# 'rbac.authorization.k8s.io/v1' is for RBAC resources like Role and RoleBinding.
+
+kind: Role
+# kind: Indicates the resource type. Here, a 'Role' defines permissions within a specific namespace.
+# Unlike a 'ClusterRole' that scoped to all cluster, a Role is scoped to a single namespace.
+
+metadata:
+  namespace: test
+  # namespace: The Role applies only to the 'test' namespace.
+  # This restricts permissions to resources in 'test' (e.g., pods in 'test', not ' in anothers namespaces).
+  name: role1
+  # name: The Role's name, used to reference it in a RoleBinding.
+
+rules:
+# rules: Lists the permissions granted by this Role.
+- apiGroups: ["*"]
+  # apiGroups: Specifies the API groups the permissions apply to.
+  # '*' includes all groups, like '' (core resources: pods, services) and 'apps' (deployments, etc.).
+  # Example: [""] for pods only, or ["apps"] for deployments.
+  resources: ["pods"]
+  # resources: Lists the types of resources that can be accessed (e.g., pods, services, configmaps).
+  # '*' allows all resources in the specified apiGroups.
+  #Example : ["pods", "services"]
+  verbs: ["get","list"]
+  # verbs: Defines the actions allowed on the resources (e.g., get, list, create, delete).
+  # '*' permits all actions.
+  # In production, prefer specific verbs like ["get", "list"] for least privilege.

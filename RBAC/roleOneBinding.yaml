@@ -1,0 +1,27 @@
+# Description: Binds a ServiceAccount to a Role in the 'test' namespace to grant specific permissions
+apiVersion: rbac.authorization.k8s.io/v1
+
+kind: RoleBinding
+# kind: Defines a RoleBinding, which links a user or ServiceAccount to a Role to apply its permissions
+# Unlike a ClusterRoleBinding.
+metadata:
+  namespace: test
+  # namespace: Applies the RoleBinding to the 'test' namespace, matching the Role's scope.
+  name: rolebinding1
+  # name: Unique name for the RoleBinding, used to identify it in the namespace.
+
+subjects:
+- kind: ServiceAccount
+  # kind: Specifies the type of entity receiving permissions. Here, a ServiceAccount.
+  name: service-account
+  # name: The ServiceAccount's name in the 'test' namespace that will gain the Role's permissions.
+  apiGroup: ""
+  # apiGroup: Empty for ServiceAccounts, as they belong to the core API group.
+
+roleRef:
+  kind: Role
+  # kind: References a Role (not a ClusterRole) to grant its defined permissions.
+  name: role1
+  # name: Refers to the Role named 'role1' in the 'test' namespace, which defines the permissions.
+  apiGroup: "rbac.authorization.k8s.io"
+  # apiGroup: Specifies the RBAC API group for the Role, ensuring Kubernetes finds it correctly.
